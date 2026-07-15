@@ -5,9 +5,11 @@
 ![Python](https://img.shields.io/badge/Language-Python-yellow)
 ![Machine Learning](https://img.shields.io/badge/Application-Neural%20Networks-red)
 
-## Overview
+---
 
-This project develops an end-to-end meteorological data processing pipeline designed to prepare high-resolution satellite, lightning, and radar observations for neural network-based precipitation estimation.
+# Overview
+
+This project develops an end-to-end meteorological data processing framework designed to prepare high-resolution satellite, lightning, and radar observations for neural network-based precipitation estimation.
 
 The framework integrates multiple NOAA atmospheric observation systems:
 
@@ -15,20 +17,23 @@ The framework integrates multiple NOAA atmospheric observation systems:
 - **Geostationary Lightning Mapper (GLM)**
 - **Multi-Radar/Multi-Sensor (MRMS) precipitation products**
 
-The primary objective is to transform raw meteorological datasets into structured, spatially aligned inputs suitable for deep learning models, including Convolutional Neural Networks (CNNs) and ConvLSTM architectures for precipitation forecasting.
+The primary objective is to transform raw meteorological observations into structured, spatially aligned datasets suitable for deep learning architectures, including:
+
+- Convolutional Neural Networks (CNN)
+- ConvLSTM precipitation forecasting models
 
 ---
 
 # Research Objectives
 
-Extreme precipitation events create major challenges for:
+Extreme precipitation events create significant challenges for:
 
 - Flood prediction
 - Severe weather monitoring
 - Agricultural planning
 - Emergency response systems
 
-This project establishes a reliable preprocessing framework capable of:
+This project establishes a preprocessing framework capable of:
 
 1. Acquiring large-scale meteorological datasets
 2. Processing satellite and radar observations
@@ -44,7 +49,7 @@ This project establishes a reliable preprocessing framework capable of:
 
 The ABI instrument provides multispectral observations across 16 spectral channels.
 
-This project uses five infrared channels:
+This project utilizes five infrared channels:
 
 | Channel | Wavelength | Application |
 |---|---|---|
@@ -67,7 +72,7 @@ These measurements provide information about:
 
 The GLM instrument provides continuous lightning observations across the Western Hemisphere.
 
-Lightning flashes were extracted as spatial coordinates and projected onto satellite grids to analyze relationships between:
+Lightning detections were extracted as spatial coordinates and projected onto satellite grids to analyze relationships between:
 
 - Lightning density
 - Convective storm development
@@ -77,7 +82,7 @@ Lightning flashes were extracted as spatial coordinates and projected onto satel
 
 # Multi-Radar/Multi-Sensor (MRMS)
 
-MRMS combines observations from:
+MRMS integrates observations from:
 
 - Ground-based radar networks
 - Satellites
@@ -85,53 +90,65 @@ MRMS combines observations from:
 
 to generate high-resolution Quantitative Precipitation Estimates (QPE).
 
-MRMS precipitation rates serve as the reference target variable for future neural network training.
+MRMS precipitation products serve as the reference target variable for future neural network training.
 
 ---
 
 # Data Processing Pipeline
 
+```text
 Raw Meteorological Data
-|
-v
-+--------------------------+
-| Data Acquisition |
-| GOES / GLM / MRMS |
-+--------------------------+
-|
-v
-+--------------------------+
-| Data Synchronization |
-| rclone + Local Storage |
-+--------------------------+
-|
-v
-+--------------------------+
-| Satellite Processing |
-| Radiance Conversion |
-| Brightness Temperature |
-+--------------------------+
-|
-v
-+--------------------------+
-| Spatial Processing |
-| Projection Alignment |
-| Geographic Cropping |
-+--------------------------+
-|
-v
-+--------------------------+
-| Dataset Generation |
-| Machine Learning Inputs |
-+--------------------------+
-|
-v
-+--------------------------+
-| Neural Network Models |
-| CNN / ConvLSTM |
-+--------------------------+
 
+          |
+          v
 
++----------------------------+
+| Data Acquisition           |
+| GOES / GLM / MRMS          |
++----------------------------+
+
+          |
+          v
+
++----------------------------+
+| Data Synchronization       |
+| rclone + Local Storage     |
++----------------------------+
+
+          |
+          v
+
++----------------------------+
+| Satellite Processing       |
+| Radiance Conversion        |
+| Brightness Temperature     |
++----------------------------+
+
+          |
+          v
+
++----------------------------+
+| Spatial Processing         |
+| Projection Alignment       |
+| Geographic Cropping        |
++----------------------------+
+
+          |
+          v
+
++----------------------------+
+| Dataset Generation         |
+| Machine Learning Inputs    |
++----------------------------+
+
+          |
+          v
+
++----------------------------+
+| Neural Network Models      |
+| CNN / ConvLSTM             |
++----------------------------+
+```
 
 ---
 
@@ -165,12 +182,13 @@ Future integration:
 
 Selected research domain:
 
+```
 Latitude:
 18.0°N - 18.5°N
 
 Longitude:
 -67.2°W - -65.8°W
-
+```
 
 Puerto Rico was selected because of:
 
@@ -198,7 +216,7 @@ The pipeline verified:
 
 GLM observations were successfully converted into spatial lightning maps.
 
-The resulting fields provide additional atmospheric features related to:
+The resulting fields provide additional atmospheric predictors related to:
 
 - Convective intensity
 - Storm evolution
@@ -208,7 +226,7 @@ The resulting fields provide additional atmospheric features related to:
 
 ## Radar Precipitation Validation
 
-Processed precipitation fields were compared with official NOAA MRMS products.
+Processed precipitation fields were compared against official NOAA MRMS products.
 
 Validation confirmed:
 
@@ -217,38 +235,40 @@ Validation confirmed:
 - Proper precipitation scaling
 - Pixel-level spatial agreement
 
-Validation event:
+### Validation Event
 
-September 18, 2022
-Puerto Rico precipitation event
-
+**September 18, 2022  
+Puerto Rico precipitation event**
 
 ---
 
 # Repository Structure
+
+```text
 Satellite-Precipitation-NN/
+
 │
 ├── data/
-│ └── Meteorological datasets
+│   └── Meteorological datasets
 │
 ├── scripts/
-│ ├── GOES_processing.py
-│ ├── GLM_processing.py
-│ └── MRMS_processing.py
+│   ├── GOES_processing.py
+│   ├── GLM_processing.py
+│   └── MRMS_processing.py
 │
 ├── notebooks/
-│ └── visualization_analysis.ipynb
+│   └── visualization_analysis.ipynb
 │
 ├── figures/
-│ ├── satellite_projection.png
-│ ├── lightning_maps.png
-│ └── precipitation_maps.png
+│   ├── satellite_projection.png
+│   ├── lightning_maps.png
+│   └── precipitation_maps.png
 │
 ├── models/
-│ └── neural_network_architecture/
+│   └── neural_network_architecture/
 │
 └── README.md
-
+```
 
 ---
 
@@ -268,18 +288,26 @@ Future development will focus on:
 
 This project establishes a validated framework connecting:
 
-**Remote Sensing + Radar Meteorology + Artificial Intelligence**
+## Remote Sensing + Radar Meteorology + Artificial Intelligence
 
-By integrating satellite cloud properties, lightning activity, and radar precipitation measurements, this framework creates a foundation for AI-driven high-resolution precipitation forecasting.
+By integrating:
+
+- Satellite cloud properties
+- Lightning activity
+- Radar precipitation measurements
+
+this framework creates the foundation for AI-driven high-resolution precipitation forecasting systems.
 
 ---
 
 # References
 
-[1] NOAA/NASA. *GOES-R Series Space Segment*.  
+[1] NOAA/NASA.  
+*GOES-R Series Space Segment.*  
 https://www.goesr.gov
 
-[2] National Severe Storms Laboratory. *Multi-Radar/Multi-Sensor (MRMS) System*.  
+[2] National Severe Storms Laboratory.  
+*Multi-Radar/Multi-Sensor (MRMS) System.*  
 https://mrms.nssl.noaa.gov
 
 ---
